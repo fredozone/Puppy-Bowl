@@ -2,7 +2,7 @@ const playerContainer = document.getElementById("all-players-container");
 const newPlayerFormContainer = document.getElementById("new-player-form");
 
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
-const cohortName = "fredozone";
+const cohortName = "FredZone99";
 // Use the APIURL variable for fetch requests
 const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
 
@@ -14,6 +14,7 @@ const fetchAllPlayers = async () => {
   try {
     const response = await fetch(`${APIURL}players`);
     const result = await response.json();
+    console.log(result);
     console.table(result.data.players);
     playerContainer.innerHTML = "";
     for (const players of result.data.players) {
@@ -112,9 +113,6 @@ const fetchSinglePlayer = async (playerId) => {
     teamsId.setAttribute("class", "breed");
     teamsId.innerHTML = "<b>Team ID: </b>" + player.teamId;
     idInfo.appendChild(teamsId);
-
-    // const seeButton = document.getElementById(`see-${playerId}`);
-    // seeButton.setAttribute("style", "visibility:hidden;");
   } catch (err) {
     console.error(`Oh no, trouble fetching player #${playerId}!`, err);
   }
@@ -322,30 +320,6 @@ const renderNewPlayerForm = () => {
     console.error("Uh oh, trouble rendering the new player form!", err);
   }
 };
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   alert("hello");
-//   const love = document.getElementById("playerForm");
-//   alert(love);
-//   love.addEventListener("submit", async function (e) {
-//     e.preventDefault();
-
-//     const name = document.getElementById("name").value;
-//     const breed = document.getElementById("breed").value;
-//     const statusActive = document.getElementById("status");
-//     const status = statusActive.checked ? statusActive.value : "";
-//     // const imageFile = document.getElementById("imagen").files[0];
-
-//     const playerObj = {
-//       name: name,
-//       breed: breed,
-//       status: status,
-//       // image: imageFile,
-//     };
-
-//     await addNewPlayer(playerObj);
-//   });
-// });
 
 const init = async () => {
   const players = await fetchAllPlayers();
